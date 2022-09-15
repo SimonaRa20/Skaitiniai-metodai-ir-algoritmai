@@ -16,9 +16,7 @@ def NewtonsMethod(f, x, tolerance=.001):
 
 
 f = lambda x: 1.35 * x ** 4 + 0.93 * x ** 3 - 26.46 * x ** 2 - 16.20 * x + 76.19
-start = funkcija.Rneig
-end = funkcija.Rteig
-intervalai = intervalas.getInterval(-start, end);
+intervalai = intervalas.interval;
 
 print('3 - Niutono (liestiniu) metodo rezultatai:')
 print('-' * 165)

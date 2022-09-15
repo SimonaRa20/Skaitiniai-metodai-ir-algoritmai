@@ -8,7 +8,9 @@ def g(x):
     return y
 
 gx = np.vectorize(g)
-x = np.arange(1, 10, 0.01)
+start = 1
+end = 10
+x = np.arange(start, end, 0.01)
 # plt.plot(x, gx(x))
 # plt.grid()
 # plt.show()
