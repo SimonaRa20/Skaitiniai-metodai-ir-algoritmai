@@ -1,10 +1,6 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import scipy
-import math
 import skenavimoAlgoritmas as intervalas
 import daugianaris as funkcija
-from scipy import misc
 
 def sign(number):
     if (number > 0):
@@ -41,7 +37,6 @@ roots = []
 
 for interval in intervals:
     roots.append(ChordMethod(interval[0], interval[1]))
-
 
 f = lambda x: 1.35 * x ** 4 + 0.93 * x ** 3 - 26.46 * x ** 2 - 16.20 * x + 76.19
 i = 0

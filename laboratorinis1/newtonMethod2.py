@@ -1,4 +1,3 @@
-
 import math
 import skenavimoAlgoritmas2 as skenavimas
 from scipy.optimize import fsolve
@@ -6,7 +5,6 @@ import scipy
 
 def discrete_method_approx(f, x, h=.001):
     return (f(x + h) - f(x)) / h
-
 
 def NewtonsMethod(f, x, tolerance=.001):
     count = 0
@@ -20,7 +18,6 @@ def NewtonsMethod(f, x, tolerance=.001):
 f = lambda x: (math.log(x) / (math.sin(2 * x) + 1.5)) - x / 7
 start = 1
 end = 10
-
 
 intervalai = skenavimas.getInterval(start, end);
 print('-' * 165)

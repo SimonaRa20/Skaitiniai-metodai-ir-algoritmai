@@ -1,9 +1,8 @@
 import numpy as np
-import math
 import daugianaris as funkcija
 import skenavimoAlgoritmas as intervalas
-
 import scipy
+
 def scanDecreasing(x1, x2):
     count = 0
     zingsnis = (x2 - x1) / 100

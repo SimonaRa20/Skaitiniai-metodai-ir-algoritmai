@@ -1,13 +1,10 @@
 
-import math
 import daugianaris as funkcija
 import skenavimoAlgoritmas as intervalas
 import scipy
 
-
 def discrete_method_approx(f, x, h=.001):
     return (f(x + h) - f(x)) / h
-
 
 def NewtonsMethod(f, x, tolerance=.001):
     count = 0

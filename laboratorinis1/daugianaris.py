@@ -3,11 +3,9 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 def f(_x):
     y = 1.35 * _x ** 4 + 0.93 * _x ** 3 - 26.46 * _x ** 2 - 16.20 * _x + 76.19
     return y
-
 
 R = 1 + (76.19 / 1.35)
 # x = np.arange(-R, R) # grubus intervalas
