@@ -26,7 +26,6 @@ intervalai = skenavimas.getInterval(start, end);
 print('-' * 165)
 print("|  {0:^44}  |  {1:^20}  |  {2:^30}  |  {3:^25}  |  {4:^20}  |".format('Intervalas', 'Gautoji saknis', 'Funkcijos reiksme saknyje', 'Tikslumas', 'Iteraciju skaicius'))
 print('-' * 165)
-# roots = [1.437, 3.787, 4.153, 6.55, 7.67, 9.504]
 
 i = 0
 for interval in intervalai:

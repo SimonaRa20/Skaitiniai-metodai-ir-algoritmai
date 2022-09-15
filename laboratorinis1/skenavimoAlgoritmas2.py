@@ -18,11 +18,10 @@ def getInterval(start, end):
     return intervals
 
 interval = getInterval(1, 10);
-print(interval)
 
 gx = np.vectorize(funkcija.g)
 x = np.arange(interval[0][0], interval[0][1], 0.01)
-plt.plot(x, gx(x))
-plt.grid()
-plt.show()
+# plt.plot(x, gx(x))
+# plt.grid()
+# plt.show()
 

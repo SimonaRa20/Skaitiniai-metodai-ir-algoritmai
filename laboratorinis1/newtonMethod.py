@@ -1,7 +1,8 @@
 
 import math
-import skenavimoAlgoritmas as funkcija
+import daugianaris as funkcija
 import skenavimoAlgoritmas as intervalas
+import scipy
 
 
 def discrete_method_approx(f, x, h=.001):
@@ -18,26 +19,19 @@ def NewtonsMethod(f, x, tolerance=.001):
 
 
 f = lambda x: 1.35 * x ** 4 + 0.93 * x ** 3 - 26.46 * x ** 2 - 16.20 * x + 76.19
-start = 1 + (26.46 / 1.35)
-end = 1 + math.sqrt(26.46 / 1.35)
+start = funkcija.Rneig
+end = funkcija.Rteig
 intervalai = intervalas.getInterval(-start, end);
-print('-' * 105)
-print("|  {0:^44}  |  {1:^25}  |  {2:^20}  |".format('Intervalas','Iteraciju skaicius','Gautoji saknis'))
-print('-' * 105)
+
+print('3 - Niutono (liestiniu) metodo rezultatai:')
+print('-' * 165)
+print("|  {0:^44}  |  {1:^20}  |  {2:^30}  |  {3:^25}  |  {4:^20}  |".format('Intervalas', 'Gautoji saknis', 'Funkcijos reiksme saknyje', 'Tikslumas', 'Iteraciju skaicius'))
+print('-' * 165)
 for interval in intervalai:
-    x0, count = NewtonsMethod(f, interval[0])
     intervalStart = interval[0]
     intervalEnd = interval[1]
-    print("|  [{0:^20}, {1:^20}]  |  {2:^25}  |  {3:^20}  |".format(intervalStart, intervalEnd, count, x0))
-print('-' * 105)
-
-
-
-# root = NewtonsMethod(f, interval[3][0])
-# print(root)
-# x0 = NewtonsMethod(3, 1.0e-6)
-
-# print('x: ', -10)
-# print('x0: ', x0)
-# print("f(x0) = ", 1.35 * x0 ** 4 + 0.93 * x0 ** 3 - 26.46 * x0 ** 2 - 16.20 * x0 + 76.19)
-
+    x0, count = NewtonsMethod(f, intervalStart)
+    y = funkcija.f(x0)
+    root = scipy.optimize.brentq(f, intervalStart, intervalEnd)
+    print("|  [{0:^20}, {1:^20}]  |  {2:^20}  |  {3:^30}  |  {4:^25}  |  {5:^20}  |".format(intervalStart, intervalEnd, x0, y, root - x0, count))
+print('-' * 165)

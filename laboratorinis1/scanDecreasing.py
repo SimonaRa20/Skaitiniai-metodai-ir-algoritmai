@@ -3,7 +3,7 @@ import math
 import daugianaris as funkcija
 import skenavimoAlgoritmas as intervalas
 
-
+import scipy
 def scanDecreasing(x1, x2):
     count = 0
     zingsnis = (x2 - x1) / 100
@@ -30,32 +30,21 @@ def getInterval(start, end):
 
     return intervals
 
-start = 1 + (26.46 / 1.35)
-end = 1 + math.sqrt(26.46 / 1.35)
-interval = getInterval(-start, end)[0];
 
-# x = interval[0]
-# print(interval)
-# x0 = scanDecreasing(interval[0], interval[1])
+f = lambda x: 1.35 * x ** 4 + 0.93 * x ** 3 - 26.46 * x ** 2 - 16.20 * x + 76.19
+start = funkcija.Rneig
+end = funkcija.Rteig
+intervalai = intervalas.getInterval(-start, end)
 
-start = 1 + (26.46 / 1.35)
-end = 1 + math.sqrt(26.46 / 1.35)
-intervalai = intervalas.getInterval(-start, end);
-print('-' * 105)
-print("|  {0:^44}  |  {1:^25}  |  {2:^20}  |".format('Intervalas','Iteraciju skaicius','Gautoji saknis'))
-print('-' * 105)
+print('5 - Skenavimo su mazejanciu zingsniu metodo rezultatai:')
+print('-' * 165)
+print("|  {0:^44}  |  {1:^20}  |  {2:^30}  |  {3:^25}  |  {4:^20}  |".format('Intervalas', 'Gautoji saknis', 'Funkcijos reiksme saknyje', 'Tikslumas', 'Iteraciju skaicius'))
+print('-' * 165)
 for interval in intervalai:
     x0, count = scanDecreasing(interval[0], interval[1])
     intervalStart = interval[0]
     intervalEnd = interval[1]
-    print("|  [{0:^20}, {1:^20}]  |  {2:^25}  |  {3:^20}  |".format(intervalStart, intervalEnd, count, x0))
-print('-' * 105)
-
-
-
-
-
-# print('x: ', x)
-# print('x0: ', x0)
-# print("f(x0) = ", 1.35 * x ** 4 + 0.93 * x ** 3 - 26.46 * x ** 2 - 16.20 * x + 76.19)
-
+    y = funkcija.f(x0)
+    root = scipy.optimize.brentq(f, intervalStart, intervalEnd)
+    print("|  [{0:^20}, {1:^20}]  |  {2:^20}  |  {3:^30}  |  {4:^25}  |  {5:^20}  |".format(intervalStart, intervalEnd, x0, y, root - x0, count))
+print('-' * 165)
