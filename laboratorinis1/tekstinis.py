@@ -10,7 +10,7 @@ def getMass(m):
 
 def scanDecreasing(x1, x2):
     zingsnis = (x2 - x1) / 100
-    while np.abs(getMass(x1)) > 0.001 and x1 + zingsnis <= x2:
+    while np.abs(getMass(x1)) > 1e-6 and x1 + zingsnis <= x2:
         if np.sign(getMass(x1)) != np.sign(getMass(x1 + zingsnis)):
             zingsnis /= 2
             continue

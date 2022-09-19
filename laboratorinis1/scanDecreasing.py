@@ -7,7 +7,7 @@ def scanDecreasing(x1, x2):
     count = 0
     zingsnis = (x2 - x1) / 100
     count += 2
-    while np.abs(funkcija.f(x1)) > 0.001 and x1 + zingsnis <= x2:
+    while np.abs(funkcija.f(x1)) > 1e-6 and x1 + zingsnis <= x2:
         if np.sign(funkcija.f(x1)) != np.sign(funkcija.f(x1 + zingsnis)):
             zingsnis /= 2
             count+=1

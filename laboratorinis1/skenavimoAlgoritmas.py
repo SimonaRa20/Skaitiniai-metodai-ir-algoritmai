@@ -18,7 +18,7 @@ def getInterval(start, end):
 startIndex = -funkcija.Rneig
 endIndex = funkcija.Rteig
 interval = getInterval(startIndex, endIndex);
-# print(interval)
+print(interval)
 
 x = np.arange(interval[0][0], interval[0][1], 0.001)
 y = funkcija.f(x)
