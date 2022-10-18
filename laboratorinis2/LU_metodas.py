@@ -1,9 +1,16 @@
 import numpy as np
-A=np.matrix([[4, 12, 1, 7],
-             [2, 6, 17, 2],
-             [2, 1, 5, 1],
-             [5, 11, 7, 0]]).astype(np.float_)
-b = (np.matrix([171, 75, 30, 50])).transpose().astype(np.float_)
+
+A=np.matrix([[3, 7, 1, 3],
+             [1, -6, 6, 8],
+             [4, 4, -7, 1],
+             [-1, 3, 8, 2]]).astype(np.float_)
+b = (np.matrix([11, 3, 1, 1])).transpose().astype(np.float_)
+
+# A=np.matrix([[4, 12, 1, 7],
+#              [2, 6, 17, 2],
+#              [2, 1, 5, 1],
+#              [5, 11, 7, 0]]).astype(np.float_)
+# b = (np.matrix([171, 75, 30, 50])).transpose().astype(np.float_)
 n = (np.shape(A))[0]
 P = np.arange(0, n)
 # tiesioginis etapas:
@@ -15,20 +22,23 @@ for i in range(0, n-1):
 
     for j in range(i+1, n):
         r = A[j, i]/A[i, i]
-        A[j, i:n+1] = A[j, i:n+1]-A[i, i:n+1]*r;
-        A[j, i] = r;
+        A[j, i:n+1] = A[j, i:n+1]-A[i, i:n+1]*r
+        A[j, i] = r
     b = b[P]
 
+y = np.arange(0, n).astype(np.float_)
 print("y reiksmes")
 # 1-as atvirkstinis etapas, sprendziama Ly=b, y->b
 for i in range(1, n):
-    b[i] = b[i] - A[i, 0:i]*b[0:i]
-    print(b[i])
+    y[i] = b[i] - A[i, 0:i]*b[0:i]
+    print(y[i])
+
+x = np.arange(0, n).astype(np.float_)
 print("x reiksmes")
 # 2-as atvirkstinis etapas , sprendziama Ux=b, x->b
 for i in range(n-1, -1, -1):
-    b[i] = (b[i] - A[i, i+1:n] * b[i+1:n]) / A[i, i]
-    print(b[i])
+    x[i] = (b[i] - A[i, i+1:n] * b[i+1:n]) / A[i, i]
+    print(x[i])
 
 
 
