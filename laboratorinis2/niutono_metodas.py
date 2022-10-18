@@ -80,8 +80,8 @@ def df(x):
     ])
 
 # Used for showing graphs
-X = np.arange(-5, 5, 0.25)
-Y = np.arange(-5, 5, 0.25)
+X = np.arange(-3, 3, 0.25)
+Y = np.arange(-3, 3, 0.25)
 XX, YY = np.meshgrid(X, Y)
 
 Z1 = 8*np.cos(XX) + YY**2

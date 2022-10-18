@@ -96,14 +96,16 @@ class Reflection:
         used_syms = 0
 
         for i in range(equation_count - 1, -1, -1):
-            values = (extended_matrix[i, equation_count:] - extended_matrix[i, i + 1:equation_count] * x_sym[i + 1: equation_count, :])
+            values = (extended_matrix[i, equation_count:] - extended_matrix[i, i + 1:equation_count] * x_sym[
+                                                                                                       i + 1:equation_count,
+                                                                                                       :])
 
             for j in range(values.shape[1]):
                 if (extended_matrix[i, i] < eps and abs(values[0, j]) < eps):
                     print(f"Skaičius X[{i}, {j}] gali būti betkoks. Pažymėsime kaip {'p' + str(used_syms)}")
                     x_sym[i, j] = sp.symbols('p' + str(used_syms))
                     used_syms += 1
-                elif extended_matrix[i, i] < eps or abs(values[0, j]) > eps:
+                elif abs(extended_matrix[i, i]) < eps and abs(values[0, j]) > eps:
                     print(f"Nėra sprendinių")
                     return None, None
                 else:
