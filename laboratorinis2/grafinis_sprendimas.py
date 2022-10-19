@@ -15,7 +15,6 @@ def LF(x):  # grazina reiksmiu stulpeli
     s = np.matrix([[8* math.cos(x[0]) + x[1]**2], [50 * math.e**(-((x[0])**2/4) + x[1]**2) +x[0]+x[1] - 5.5]])
     return s
 
-
 # ----------------------------------
 
 fig1 = plt.figure(1, figsize=plt.figaspect(0.5));

@@ -2,10 +2,9 @@ import numpy as np
 import sympy as sp
 from decimal import Decimal
 
-
 class Assess:
     @staticmethod
-    def check_error(a, x, b, precision=15):
+    def check_error(a, x, b, precision=12):
         result = np.dot(a, x)
         error = result - b
         shape = error.shape
@@ -55,7 +54,7 @@ class Reflection:
 
         return sub / np.linalg.norm(sub)
 
-    def solve(self, matrix, free_members, eps=1e-4):
+    def solve(self, matrix, free_members, eps=1e-12):
         equation_count = (np.shape(matrix))[0]
         free_member_count = (np.shape(free_members))[1]
         extended_matrix = np.hstack((matrix, free_members))
@@ -148,96 +147,3 @@ free_membersB = (np.matrix([11, 3, 1, 1])).transpose().astype(float)
 
 do_task(reflection, matrixA, free_membersA)
 do_task(reflection, matrixB, free_membersB)
-# import numpy as np
-# from scipy.linalg import lu, lu_factor, lu_solve
-# from time import time
-# def AtspindzioMetodas(A, n):
-#     flag = 0
-#     # tiesioginis etapas(atspindziai):
-#     for i in range(0, n - 1):
-#         z = A1[i:n, i]
-#         zp = np.zeros(np.shape(z))
-#         zp[0] = np.linalg.norm(z)
-#         omega = z - zp
-#         omega = omega / np.linalg.norm(omega)
-#         Q = np.identity(n - i) - 2 * omega * omega.transpose()
-#         A1[i:n, :] = Q.dot(A1[i:n, :])
-#         # atgalinis etapas:
-#     x = np.zeros(shape=(n, nb))
-#     for i in range(n - 1, -1, -1):  # range pradeda n-1 ir baigia 0 (trecias parametras yra zingsnis)
-#         x[i, :] = (A1[i, n:n + nb] - A1[i, i + 1:n] * x[i + 1:n, :]) / A1[i, i]
-#         A[i,:] = x[i,:]
-#
-#     return flag
-#
-# def BegalybesTikrinimas(A, n, flag):
-#     flag=3
-#     for i in range(n):
-#         sum=0
-#         for j in range(n):
-#             sum=sum+A[i,j]
-#             j=j+1
-#             if(sum==A[i,j]and sum==0):
-#                 flag=2
-#     return flag
-#
-# def LygtiesPalyginimas(A,Rezultatai):
-#     if (len(Rezultatai) == 0):
-#         return ""
-#     Ats = A.dot(Rezultatai)
-#     return Ats
-#
-# def SpausdintiRezultatus(A,n,flag):
-#     print("Rezultatai:")
-#     rezultatai=np.empty([n,1],dtype=float)
-#     if(flag==2):
-#         print("Begalybesprendiniu")
-#         return[]
-#     elif(flag==3):
-#         print("Nerasprendiniu")
-#         return[]
-#     else:
-#         for i in range(n):
-#             # print(A[i,n]/A[i,i],end="")
-#             rezultatai[i,0]=A[i,n]/A[i,i]
-#     print()
-#     return rezultatai
-#
-# A=np.matrix([[3, 7, 1, 3],
-#              [1, -6, 6, 8],
-#              [4, 4, -7, 1],
-#              [-1, 3, 8, 2]]).astype(np.float_)
-# b = (np.matrix([11, 3, 1, 1])).transpose().astype(np.float_)
-# # A = np.matrix([[4, 12, 1, 7],
-# #              [2, 6, 17, 2],
-# #              [2, 1, 5, 1],
-# #              [5, 11, 7, 0]]).astype(np.float_)
-# # b = (np.matrix([171, 75, 30, 50])).transpose().astype(np.float_)
-# n = (np.shape(A))[0]
-# nb = (np.shape(b))[1]
-#
-# A1 = np.hstack((A, b))
-#
-# flag = 0
-#
-# if(AtspindzioMetodas(A1,n)):
-#     flag=BegalybesTikrinimas(A1,n,1)
-#
-# rezultatai=SpausdintiRezultatus(A1,n,flag)
-# print("\nRezultatupasitikrinimasistatantipradinesalyga:")
-# print(LygtiesPalyginimas(A,rezultatai))
-#
-#
-#
-# P, L, U = lu(A)
-#
-# #  Show the A = PLA
-# np.allclose(L @ U, A)
-# #  Do the factorization
-# LU, p = lu_factor(A)
-#
-# #  Solve the system
-# x1 = lu_solve((LU, p), b)
-# print(x1)
-# print("\nRezultatupasitikrinimaspasinaudojantpythonfunkcijom:")
-# print(np.linalg.solve(x1,A,b))

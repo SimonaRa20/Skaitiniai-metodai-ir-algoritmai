@@ -1,102 +1,74 @@
-from mpl_toolkits.mplot3d import axes3d
-import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import cm
+import matplotlib.pyplot as plt
 
-np.warnings.filterwarnings('ignore')
-
-# Shows z1 function graph
-def show_z1_graph():
-    fig = plt.figure()
-    fig.canvas.set_window_title('Z1')
-    ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(XX, YY, Z1, cmap=cm.coolwarm,
-                           alpha=0.5)
-    surfZ = ax.plot_surface(XX, YY, np.zeros(np.shape(Z1)), antialiased=False, alpha=0.2)
-    cp = ax.contour(X, Y, Z1, levels=0, colors='red')
-    plt.show()
-
-
-# Shows z2 function graph
-def show_z2_graph():
-    fig = plt.figure()
-    fig.canvas.set_window_title('Z2')
-    ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(XX, YY, Z2, cmap=cm.summer,
-                           antialiased=False, alpha=0.5)
-    surf_z = ax.plot_surface(XX, YY, np.zeros(np.shape(Z1)), antialiased=False, alpha=0.2)
-    cp = ax.contour(X, Y, Z2, levels=0, colors='green')
-    plt.show()
-
-
-# Solves system graphically
-def show_f_roots():
-    fig = plt.figure()
-    fig.canvas.set_window_title('Result')
-    ax = fig.gca()
-    ax.grid(color='#C0C0C0', linestyle='-', linewidth=0.5)
-    cp = ax.contour(X, Y, Z1, levels=0, colors='red')
-    cp = ax.contour(X, Y, Z2, levels=0, colors='green')
-    plt.show()
-
-
-# Solves system using newton's method
-def newton(x):
-    ff = f(x)
-    dff = df(x)
-    for i in range(max_iterations):
-        dff = df(x)
-        delta_x, a, b, c = np.linalg.lstsq(-dff, ff)
-
-        x1 = x.reshape(2, 1) + alpha * delta_x
-        ff1 = f([x1[0, 0], x1[1, 0]])
-
-        precision = np.linalg.norm(delta_x) / (np.linalg.norm(x) + np.linalg.norm(delta_x))
-        print(f"Iteration: {i} Precision: {precision}")
-
-        if precision < eps:
-            print(f"Solution: {x}")
-            return x
-        elif i == max_iterations:
-            print(f"Set precision not reached. Last x = {x}")
-            return
-
-        x = np.array([x1[0, 0], x1[1, 0]])
-        ff = ff1
-
-
-
-def f(x):
-    return np.asmatrix([
-        [8*np.cos(x[0]) + (x[1])**2],
-        [50*np.e**(-((x[0]**2)/4) + x[1]**2) +x[0] + x[1] - 5.5]
-    ])
-
+def fx(x):
+    mat=np.array([
+        8*np.cos(x[0]) + (x[1])**2,
+        50*np.exp(-((x[0]**2)/4) + x[1]**2) +x[0] + x[1] - 5.5
+        ], dtype=float)
+    mat.shape=(2,1)
+    mat=np.matrix(mat)
+    return mat
 
 def df(x):
-    return np.asmatrix([
-        [-8*np.sin(x[0]), 2 * x[1]],
-        [1-25*x[0]*np.e**(x[1]**2 - (x[0]**2 / 4)), 100*x[0]*np.e**(x[0]**2 - (x[1]**2 / 4)) + 1]
-    ])
+    dfmat=np.array([
+        -8*np.sin(x[0]), 2 * x[1],
+        1-25*x[0]*np.exp(x[1]**2 - (x[0]**2 / 4)), 100*x[0]*np.exp(x[0]**2 - (x[1]**2 / 4)) + 1
+        ], dtype=float)
+    dfmat.shape=(2,2)
+    dfmat=np.matrix(dfmat)
+    return dfmat
 
-# Used for showing graphs
-X = np.arange(-3, 3, 0.25)
-Y = np.arange(-3, 3, 0.25)
-XX, YY = np.meshgrid(X, Y)
 
-Z1 = 8*np.cos(XX) + YY**2
-Z2 = 50* np.e**(-((XX**2)/4) + YY) +XX + YY - 5.5
+def newton(x, alpha):
+    xValue = []
+    itmax=1000
+    eps=1e-10
+    for i in range(itmax):
+        deltax=-alpha*np.linalg.solve(df(x), fx(x))
+        x=np.matrix(x+deltax)
+        prec=np.linalg.norm(deltax) / (np.linalg.norm(x) + np.linalg.norm(deltax))
+        print('Iteracija: %d tikslumas: %e'%(i, prec))
+        if prec < eps:
+            print('Sprendinys x=')
+            print(x)
+            xValue = x
+            print('Funkcijos reiksme f=')
+            print(fx(x))
+            break
+        elif i == itmax-1:
+            print('Tikslumas nepasiektas, paskutinis artinys x=')
+            print(x)
+            print('Funkcijos reiksme f=')
+            print(fx(x))
+    return xValue
 
-show_z1_graph()
-show_z2_graph()
+n=2
+x=np.matrix(np.zeros(shape=(n,1)));
+x[0]=2
+x[1]=2
 
-show_f_roots()
+alpha=0.7
 
-alpha = 1
-max_iterations = 200
-eps = 1e-10
-initial_x = np.array([1, 1])  # Initial guess
+# def draw():
+#     fig1=plt.figure(1,figsize=plt.figaspect(0.5));
+#     ax1 = fig1.add_subplot(1, 2, 1, projection='3d')
+#     ax2 = fig1.add_subplot(1, 2, 2, projection='3d')
+#     plt.draw()
+#     xx=np.linspace(-10,10,20);yy=np.linspace(-10,10,20)
+#     X, Y = np.meshgrid(xx, yy)
+#     Z=np.zeros(shape=(len(xx),len(yy),2))
+#     for i in range (0,len(xx)):
+#         for j in range (0,len(yy)): Z[i,j,:]=fx([X[i][j],Y[i][j]]).transpose();
+#     surf1 = ax1.plot_surface(X, Y, Z[:,:,0], color='blue', alpha=0.4)
+#     CS11 = ax1.contour(X, Y, Z[:,:,0],[0],colors='b')
+#     surf2 = ax1.plot_surface(X, Y, Z[:,:,1], color='purple',alpha=0.4)
+#     CS12 = ax1.contour(X, Y, Z[:,:,1],[0],colors='g')
+#     CS1 = ax2.contour(X, Y, Z[:,:,0],[0],colors='b')
+#     CS2 = ax2.contour(X, Y, Z[:,:,1],[0],colors='g')
+#     plt.show()
+#
+# draw()
 
-# Solves system and checks with f function
-result = newton(initial_x)
-print(f(result))
+
+
