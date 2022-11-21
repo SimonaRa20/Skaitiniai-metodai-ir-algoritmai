@@ -1,7 +1,6 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-# pirma uzduotis
 def f(x):
     return (np.log(x) / (np.sin(2 * x) + 1.5)) + (x / 5)
 
