@@ -27,7 +27,6 @@ def get_fx_points(begin, end, increment):
 
     return x, y
 
-
 # get interpolated function points in start-stop range
 def get_interpolated_points(begin, end, increment, coefficients):
     x = []

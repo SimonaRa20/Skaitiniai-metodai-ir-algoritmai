@@ -22,13 +22,12 @@ def eval(X,n,a):
 
 f=lambda x:(np.log(x) / (np.sin(2 * x) + 1.5)) + (x / 5)
 
-yCO2emission=np.array([516.82, 507.64, 506.03, 511.21, 504.28, 509.04, 499.20, 492.48,
-         486.46, 468.66, 472.62, 456.72, 460.30, 461.27, 427.77, 433.22, 433.60,
-         436.18, 422.74,])
+yCO2emission=np.array([516.82, 507.64, 506.03, 511.21, 504.28, 507.75, 509.04, 499.20, 492.48, 486.46, 
+                       468.66, 472.62, 456.72, 460.30, 461.27, 427.77, 433.22, 433.60, 436.18, 422.74,])
 
-interval=(1,19)
-n=19
-X=np.linspace(*interval,19)
+interval=(1,20)
+n=20
+X=np.linspace(*interval,20)
 a=calculate_coeficients(X,yCO2emission).T
 smooth=np.linspace(*interval,100)
 yval=eval(smooth,n,a)

@@ -1,13 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-yCO2emission=np.array([516.82, 507.64, 506.03, 511.21, 504.28, 509.04, 499.20, 492.48,
-         486.46, 468.66, 472.62, 456.72, 460.30, 461.27, 427.77, 433.22, 433.60,
-         436.18, 422.74,])
-x=np.linspace(1,19,19)
+yCO2emission=np.array([516.82, 507.64, 506.03, 511.21, 504.28, 507.75, 509.04, 499.20, 492.48, 486.46, 
+              468.66, 472.62, 456.72, 460.30, 461.27, 427.77, 433.22, 433.60, 436.18, 422.74,])
+x=np.linspace(1,20,20)
 plt.plot(x,yCO2emission,'ro')
 n=len(x)
-m=3 # keisti norint gauti aproksimuojančias skirtingas daugianario kreives
+m=5 # keisti norint gauti aproksimuojančias skirtingas daugianario kreives
 BaseMatrix=np.zeros((n,m))
 for i in range(n):
     for j in range(m):
