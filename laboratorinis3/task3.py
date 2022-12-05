@@ -22,4 +22,7 @@ for i in range(m):
     func+=str(np.round(koef[i],2))+'x^'+str(i)+'+'
 print(func)
 plt.plot(xxx,yyy,'b-',linewidth=3)
+plt.title("Prancūzijos šiltnamio dujų emisijos grafikas (aproksimavimas)")
+plt.xlabel('x')
+plt.ylabel('y')
 plt.show()

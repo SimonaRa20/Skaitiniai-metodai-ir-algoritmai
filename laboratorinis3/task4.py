@@ -63,5 +63,7 @@ for i in range(1,len(x)):
         xPlt=xPlt+U*x[i+j-1]+V*dx[i+j-1]
             
     plt.plot(xPlt,yPlt)
-
+plt.title("Prancūzijos šalies kontūras (parametrinis aproksimavimas)")
+plt.xlabel('x')
+plt.ylabel('y')
 plt.show()

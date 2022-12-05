@@ -79,5 +79,7 @@ for i in range(1,20):
         U,V=Hermite(x[i-1:i+1],j,xPlt)
         yPlt=yPlt+U*yCO2emission[i+j-1]+V*dy[i+j-1]
     plt.plot(xPlt,yPlt)
-
+plt.title("Prancūzijos šiltnamio dujų emisijos grafikas (splainu)")
+plt.xlabel('x')
+plt.ylabel('y')
 plt.show()
