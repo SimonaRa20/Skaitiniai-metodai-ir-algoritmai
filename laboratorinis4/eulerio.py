@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plot
+import math
 
 m1=0.15
 m2=0.2
@@ -51,7 +52,7 @@ def euler(dt, showVelocity, showHeight):
     isRising2 = True
     isLanded2 = False
     now = 0
-
+    
     while now < tmax:
         if now < ts: 
             if isRising:
@@ -141,7 +142,9 @@ def euler(dt, showVelocity, showHeight):
             antroMax = h2_arr[i]
 
     print("Aukščiausias Pirmo kūno taškas:",pirmoMax)
+    print("Laikas Pirmo kūno taškas:",math.sqrt(2*pirmoMax / g))
     print("Aukščiausias Antro taškas:", antroMax)
+    print("Laikas Antro taškas:", math.sqrt(2*antroMax/g))
 
     if showVelocity:
         pirmo_greitis = plot.plot(t_arr, v_arr)
@@ -150,8 +153,6 @@ def euler(dt, showVelocity, showHeight):
         arguments.append(antro_greitis)
         labels.append("Pirmo greitis žings:" +str(dt))
         labels.append("Antro greitis žings:" +str(dt))
-        # taskas = plot.axvline(x=ts, color='r', linestyle='dotted')
-        # plot.legend([pirmo_greitis, antro_greitis, taskas], labels=["Pirmo greitis zings:" +str(dt),"Antro greitis zings:" +str(dt), "Issiskirimo momentas"])
 
     if showHeight:
         pirmo_aukstis = plot.plot(t_arr, h_arr)
@@ -160,9 +161,7 @@ def euler(dt, showVelocity, showHeight):
         arguments.append(antra_aukstis)
         labels.append("Pirmo aukštis žings:" +str(dt))
         labels.append("Antro aukštis žings:" +str(dt))
-        # taskas = plot.axvline(x=ts, color='r', linestyle='dotted')
-        # plot.legend([pirmo_aukstis, antra_aukstis, taskas], labels=["Pirmo aukstis zings:" +str(dt),  "Antro aukstis zings:" +str(dt), "Issiskirimo momentas"])
-
+        
 euler(0.15, True, False)
 euler(0.1, True, False)
 euler(0.05, True, False)

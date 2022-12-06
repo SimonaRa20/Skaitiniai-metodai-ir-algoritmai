@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plot
 import numpy as np
+import math 
 
 m1=0.15
 m2=0.2
@@ -10,10 +11,14 @@ k1=0.05
 k2=0.001
 tmax=10
 g=9.8
-h = 0.0000001
+h = 0.001
 k = ks
 m = m1+m2
 h0=0
+
+
+arguments = []
+labels = []
 
 def dvdts(time, v1, v2):
     if time <= ts:
@@ -96,9 +101,8 @@ def rk4(dt):
     heights.append(plot.plot(tt, h1_arr))
     heights.append(plot.plot(tt, h2_arr))
     
-    labelsv.append("Pirmo kūno aukštis žingsn:" + str(dt))
-    labelsv.append("Antro kūno aukštis žingsn:" + str(dt))
-
+    labelsh.append("Pirmo kūno aukštis žingsn:" + str(dt))
+    labelsh.append("Antro kūno aukštis žingsn:" + str(dt))
 
 rk4(0.3)
 rk4(0.1)
@@ -106,9 +110,14 @@ rk4(0.01)
 
 taskas = plot.axvline(x=ts, color='r', linestyle='dotted')
 plot.ylim(0)
+# plot.ylabel("Greitis")
+# plot.xlabel("Laikas s")
+# velocities.append(taskas)
+# labelsv.append("Išsiskirimo momentas")
+# plot.legend(velocities, labels=labelsv)
 plot.ylabel("Aukštis")
 plot.xlabel("Laikas s")
-velocities.append(taskas)
-labelsv.append("Išsiskirimo momentas")
-plot.legend(velocities, labels=labelsv)
+heights.append(taskas)
+labelsh.append("Išsiskirimo momentas")
+plot.legend(heights, labels=labelsh)
 plot.show()
