@@ -162,7 +162,7 @@ def euler(dt, showVelocity, showHeight):
         labels.append("Pirmo aukštis žings:" +str(dt))
         labels.append("Antro aukštis žings:" +str(dt))
         
-euler(0.15, True, False)
+euler(0.2, True, False)
 euler(0.1, True, False)
 euler(0.05, True, False)
 taskas = plot.axvline(x=ts, color='r', linestyle='dotted')
